@@ -1,0 +1,12 @@
+.reserva-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: .75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .3rem .75rem;
+  font-size: .88rem;
+}
+.reserva-item strong { color: var(--red); }

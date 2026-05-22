@@ -1,0 +1,47 @@
+.page-hero {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero--red {
+  background: linear-gradient(135deg, var(--red-dark), var(--red));
+  color: white;
+}
+.page-hero--dark {
+  background: linear-gradient(135deg, #1a0f0f, #2d0808);
+  color: white;
+}
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  margin-bottom: .5rem;
+}
+.page-hero p { opacity: .8; font-size: 1.1rem; }
+
+
+.tabs, .delivery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 2rem;
+}
+.tab {
+  padding: .6rem 1.4rem;
+  border-radius: 50px;
+  border: 2px solid var(--border);
+  background: white;
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.tab:hover { border-color: var(--red); color: var(--red); }
+.tab.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
