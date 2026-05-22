@@ -1,8 +1,3 @@
-/* ============================================================
-   BRASA & ARTE — APP.JS
-   ============================================================ */
-
-// ── DATA ──────────────────────────────────────────────────────
 const MENU = {
   carnes: [
     { id: 1, nome: "Picanha na Brasa", desc: "Corte nobre grelhado no fogo vivo, servido com farofa da casa e vinagrete.", preco: 89.90 },
@@ -47,50 +42,40 @@ let deliveryCat = "carnes";
 
 // ── NAVIGATION ────────────────────────────────────────────────
 function goTo(pageId) {
-  // Hide all pages
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  // Show target
-  const target = document.getElementById(pageId);
-  if (target) target.classList.add("active");
-  // Update nav links
-  document.querySelectorAll(".nav__link").forEach(a => {
-    a.classList.toggle("active", a.dataset.page === pageId);
-  });
-  // Close mobile menu
-  document.getElementById("navLinks").classList.remove("open");
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  // Init page-specific content
-  if (pageId === "cardapio") initCardapio();
-  if (pageId === "delivery") initDelivery();
-  if (pageId === "reservas") initReservas();
+  const routes = {
+    home: "index.html",
+    cardapio: "cardapio.html",
+    delivery: "delivery.html",
+    reservas: "reservas.html",
+    cadastro: "cadastro.html",
+  };
+
+  if (routes[pageId]) {
+    window.location.href = routes[pageId];
+  }
 }
 
-// Nav link click handlers
-document.querySelectorAll(".nav__link").forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
-    goTo(link.dataset.page);
+// Fecha/abre o menu mobile
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
   });
-});
+}
 
-// Logo click → home
-document.querySelector(".nav__logo").addEventListener("click", () => goTo("home"));
-
-// Scrolled class
+// Sombra no menu ao rolar
 window.addEventListener("scroll", () => {
-  document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 10);
-});
-
-// Mobile toggle
-document.getElementById("navToggle").addEventListener("click", () => {
-  document.getElementById("navLinks").classList.toggle("open");
+  const nav = document.getElementById("nav");
+  if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
 });
 
 // ── CARDÁPIO ──────────────────────────────────────────────────
 let cardapioActive = "carnes";
 
 function initCardapio() {
+  if (!document.getElementById("cardapioTabs") || !document.getElementById("menuGrid")) return;
   renderMenuGrid(cardapioActive);
   document.querySelectorAll("#cardapioTabs .tab").forEach(tab => {
     tab.addEventListener("click", () => {
@@ -104,6 +89,7 @@ function initCardapio() {
 
 function renderMenuGrid(cat) {
   const grid = document.getElementById("menuGrid");
+  if (!grid) return;
   const items = MENU[cat] || [];
   grid.innerHTML = items.map(item => `
     <div class="menu-item">
@@ -118,6 +104,7 @@ function renderMenuGrid(cat) {
 
 // ── DELIVERY ──────────────────────────────────────────────────
 function initDelivery() {
+  if (!document.getElementById("deliveryTabs") || !document.getElementById("deliveryItems")) return;
   renderDeliveryItems(deliveryCat);
   document.querySelectorAll("#deliveryTabs .tab").forEach(tab => {
     tab.addEventListener("click", () => {
@@ -132,6 +119,7 @@ function initDelivery() {
 
 function renderDeliveryItems(cat) {
   const container = document.getElementById("deliveryItems");
+  if (!container) return;
   const items = MENU[cat] || [];
   container.innerHTML = items.map(item => `
     <div class="delivery-card">
@@ -139,13 +127,13 @@ function renderDeliveryItems(cat) {
       <p>${item.desc}</p>
       <div class="delivery-card__footer">
         <span class="delivery-card__price">R$ ${item.preco.toFixed(2).replace(".", ",")}</span>
-        <button class="btn btn--primary btn--sm" onclick="addToCart(${item.id})">+ Adicionar</button>
+        <button class="btn btn--primary btn--sm" onclick="addToCart(${item.id}, this)">+ Adicionar</button>
       </div>
     </div>
   `).join("");
 }
 
-function addToCart(itemId) {
+function addToCart(itemId, button) {
   // Find item in all categories
   let found = null;
   for (const cat of Object.values(MENU)) {
@@ -160,16 +148,16 @@ function addToCart(itemId) {
   }
   renderCart();
   // Animate button feedback
-  event.target.textContent = "✓ Adicionado";
-  event.target.style.background = "#16a34a";
-  event.target.style.borderColor = "#16a34a";
-  setTimeout(() => {
-    if (event.target) {
-      event.target.textContent = "+ Adicionar";
-      event.target.style.background = "";
-      event.target.style.borderColor = "";
-    }
-  }, 1200);
+  if (button) {
+    button.textContent = "✓ Adicionado";
+    button.style.background = "#16a34a";
+    button.style.borderColor = "#16a34a";
+    setTimeout(() => {
+      button.textContent = "+ Adicionar";
+      button.style.background = "";
+      button.style.borderColor = "";
+    }, 1200);
+  }
 }
 
 function changeQty(itemId, delta) {
@@ -183,6 +171,7 @@ function renderCart() {
   const list = document.getElementById("cartList");
   const totalWrap = document.getElementById("cartTotal");
   const formWrap = document.getElementById("cartForm");
+  if (!list || !totalWrap || !formWrap) return;
 
   const items = Object.values(cart);
   if (items.length === 0) {
@@ -255,9 +244,11 @@ function finalizarPedido() {
 
 // ── RESERVAS ──────────────────────────────────────────────────
 function initReservas() {
+  const resData = document.getElementById("resData");
+  if (!resData) return;
   // Set min date to today
   const today = new Date().toISOString().split("T")[0];
-  document.getElementById("resData").min = today;
+  resData.min = today;
 }
 
 function submeterReserva(e) {
@@ -309,6 +300,7 @@ function renderReservaList() {
   const reservas = JSON.parse(localStorage.getItem("brasaReservas") || "[]");
   const wrap = document.getElementById("reservaListWrap");
   const list = document.getElementById("reservaList");
+  if (!wrap || !list) return;
   if (reservas.length === 0) { wrap.style.display = "none"; return; }
   wrap.style.display = "block";
   list.innerHTML = [...reservas].reverse().slice(0, 10).map(r => `
@@ -373,6 +365,7 @@ function verClientes() {
 function renderClientesTable() {
   const clientes = JSON.parse(localStorage.getItem("brasaClientes") || "[]");
   const tbody = document.getElementById("clientesTbody");
+  if (!tbody) return;
   if (clientes.length === 0) {
     tbody.innerHTML = "<tr><td colspan='4' style='text-align:center;color:#888'>Nenhum cliente ainda.</td></tr>";
     return;
@@ -388,7 +381,10 @@ function renderClientesTable() {
 }
 
 // ── INIT ──────────────────────────────────────────────────────
-// Activate home on load
-goTo("home");
-// Load existing reservas if any on init
-renderReservaList();
+document.addEventListener("DOMContentLoaded", () => {
+  initCardapio();
+  initDelivery();
+  initReservas();
+  renderReservaList();
+  renderClientesTable();
+});

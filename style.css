@@ -644,3 +644,4 @@ body {
   font-size: .88rem;
 }
 .reserva-item strong { color: var(--red); }
+.nav__logo { text-decoration: none; }

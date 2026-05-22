@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brasa & Arte — Cardápio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <nav class="nav" id="nav">
+        <a class="nav__logo" href="index.html">Brasa<span>&</span>Arte</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="index.html" class="nav__link" data-page="home">Início</a></li>
+            <li><a href="cardapio.html" class="nav__link active" data-page="cardapio">Cardápio</a></li>
+            <li><a href="delivery.html" class="nav__link" data-page="delivery">Delivery</a></li>
+            <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
+            <li><a href="cadastro.html" class="nav__link" data-page="cadastro">Cadastro</a></li>
+        </ul>
+    </nav>
+
+
+    <section class="page active" id="cardapio">
+        <div class="page-hero page-hero--red">
+            <h1>Cardápio</h1>
+            <p>Sabores que contam histórias</p>
+        </div>
+        <div class="container" style="padding:3rem 1rem">
+            <div class="tabs" id="cardapioTabs">
+                <button class="tab active" data-cat="carnes">🥩 Carnes</button>
+                <button class="tab" data-cat="peixes">🐟 Peixes</button>
+                <button class="tab" data-cat="entradas">🥗 Entradas</button>
+                <button class="tab" data-cat="bebidas">🍺 Bebidas</button>
+                <button class="tab" data-cat="sobremesas">🍮 Sobremesas</button>
+            </div>
+            <div class="menu-grid" id="menuGrid"></div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

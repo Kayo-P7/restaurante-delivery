@@ -16,16 +16,16 @@
 <body>
 
     <nav class="nav" id="nav">
-        <div class="nav__logo">Brasa<span>&</span>Arte</div>
+        <a class="nav__logo" href="index.html">Brasa<span>&</span>Arte</a>
         <button class="nav__toggle" id="navToggle" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
         <ul class="nav__links" id="navLinks">
-            <li><a href="#home" class="nav__link active" data-page="home">Início</a></li>
-            <li><a href="#cardapio" class="nav__link" data-page="cardapio">Cardápio</a></li>
-            <li><a href="#delivery" class="nav__link" data-page="delivery">Delivery</a></li>
-            <li><a href="#reservas" class="nav__link" data-page="reservas">Reservas</a></li>
-            <li><a href="#cadastro" class="nav__link" data-page="cadastro">Cadastro</a></li>
+            <li><a href="index.html" class="nav__link active" data-page="home">Início</a></li>
+            <li><a href="cardapio.html" class="nav__link" data-page="cardapio">Cardápio</a></li>
+            <li><a href="delivery.html" class="nav__link" data-page="delivery">Delivery</a></li>
+            <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
+            <li><a href="cadastro.html" class="nav__link" data-page="cadastro">Cadastro</a></li>
         </ul>
     </nav>
 
@@ -43,8 +43,8 @@
                 <p class="hero__sub">Churrasco premium, sabores amazônicos e experiências que ficam na memória. Venha
                     viver o Brasa & Arte.</p>
                 <div class="hero__btns">
-                    <button class="btn btn--primary" onclick="goTo('cardapio')">Ver Cardápio</button>
-                    <button class="btn btn--outline" onclick="goTo('reservas')">Fazer Reserva</button>
+                    <a class="btn btn--primary" href="cardapio.html">Ver Cardápio</a>
+                    <a class="btn btn--outline" href="reservas.html">Fazer Reserva</a>
                 </div>
             </div>
             <div class="hero__badge">
@@ -124,253 +124,13 @@
                 </div>
                 <div>
                     <h5>Links</h5>
-                    <p><a href="#cardapio" onclick="goTo('cardapio')">Cardápio</a></p>
-                    <p><a href="#delivery" onclick="goTo('delivery')">Delivery</a></p>
-                    <p><a href="#reservas" onclick="goTo('reservas')">Reservas</a></p>
+                    <p><a href="cardapio.html">Cardápio</a></p>
+                    <p><a href="delivery.html">Delivery</a></p>
+                    <p><a href="reservas.html">Reservas</a></p>
                 </div>
             </div>
             <div class="footer__copy">© 2025 Brasa & Arte. Todos os direitos reservados.</div>
         </footer>
-    </section>
-
-    <!--cardápio. -->
-    <section class="page" id="cardapio">
-        <div class="page-hero page-hero--red">
-            <h1>Cardápio</h1>
-            <p>Sabores que contam histórias</p>
-        </div>
-        <div class="container" style="padding:3rem 1rem">
-            <div class="tabs" id="cardapioTabs">
-                <button class="tab active" data-cat="carnes">🥩 Carnes</button>
-                <button class="tab" data-cat="peixes">🐟 Peixes</button>
-                <button class="tab" data-cat="entradas">🥗 Entradas</button>
-                <button class="tab" data-cat="bebidas">🍺 Bebidas</button>
-                <button class="tab" data-cat="sobremesas">🍮 Sobremesas</button>
-            </div>
-            <div class="menu-grid" id="menuGrid"></div>
-        </div>
-    </section>
-
-    <!--delivery -->
-    <section class="page" id="delivery">
-        <div class="page-hero page-hero--dark">
-            <h1>Delivery</h1>
-            <p>Na sua casa em até 45 minutos</p>
-        </div>
-        <div class="container delivery-layout">
-            <div class="cart-side">
-                <h2 class="section__title" style="text-align:left">Monte seu Pedido</h2>
-                <div class="delivery-tabs" id="deliveryTabs">
-                    <button class="tab active" data-dcat="carnes">Carnes</button>
-                    <button class="tab" data-dcat="peixes">Peixes</button>
-                    <button class="tab" data-dcat="entradas">Entradas</button>
-                    <button class="tab" data-dcat="bebidas">Bebidas</button>
-                </div>
-                <div class="delivery-items" id="deliveryItems"></div>
-            </div>
-            <div class="cart-panel" id="cartPanel">
-                <h3>🛒 Seu Pedido</h3>
-                <div class="cart-list" id="cartList">
-                    <p class="cart-empty">Nenhum item adicionado ainda.</p>
-                </div>
-                <div class="cart-total" id="cartTotal" style="display:none">
-                    <div class="cart-subtotal">
-                        <span>Subtotal</span><span id="subtotalVal">R$ 0,00</span>
-                    </div>
-                    <div class="cart-subtotal">
-                        <span>Entrega</span><span>R$ 8,00</span>
-                    </div>
-                    <div class="cart-subtotal cart-subtotal--bold">
-                        <span>Total</span><span id="totalVal">R$ 0,00</span>
-                    </div>
-                </div>
-                <div class="cart-form" id="cartForm" style="display:none">
-                    <input type="text" class="input" id="delivName" placeholder="Seu nome" required />
-                    <input type="tel" class="input" id="delivPhone" placeholder="Telefone" required />
-                    <input type="text" class="input" id="delivAddr" placeholder="Endereço completo" required />
-                    <select class="input" id="delivPay">
-                        <option value="">Forma de pagamento</option>
-                        <option>Dinheiro</option>
-                        <option>Cartão (maquininha)</option>
-                        <option>Pix</option>
-                    </select>
-                    <button class="btn btn--primary" style="width:100%" onclick="finalizarPedido()">Finalizar
-                        Pedido</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--reservas.-->
-    <section class="page" id="reservas">
-        <div class="page-hero page-hero--red">
-            <h1>Reservas</h1>
-            <p>Reserve sua mesa com antecedência</p>
-        </div>
-        <div class="container" style="padding:3rem 1rem;max-width:680px">
-            <div class="form-card">
-                <h2 class="section__title" style="margin-bottom:1.5rem">Fazer Reserva</h2>
-                <form id="reservaForm" onsubmit="submeterReserva(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nome completo</label>
-                            <input type="text" class="input" id="resNome" placeholder="João Silva" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="tel" class="input" id="resTel" placeholder="(91) 99999-0000" required />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Data</label>
-                            <input type="date" class="input" id="resData" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Horário</label>
-                            <select class="input" id="resHorario" required>
-                                <option value="">Selecione</option>
-                                <option>12:00</option>
-                                <option>13:00</option>
-                                <option>14:00</option>
-                                <option>19:00</option>
-                                <option>20:00</option>
-                                <option>21:00</option>
-                                <option>22:00</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Pessoas</label>
-                            <select class="input" id="resPessoas" required>
-                                <option value="">Quantas pessoas?</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7–10</option>
-                                <option>+10 (salão privativo)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Ocasião</label>
-                            <select class="input" id="resOcasiao">
-                                <option value="">Selecione (opcional)</option>
-                                <option>Aniversário</option>
-                                <option>Jantar Romântico</option>
-                                <option>Confraternização</option>
-                                <option>Reunião de Negócios</option>
-                                <option>Outro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Observações</label>
-                        <textarea class="input" id="resObs" rows="3"
-                            placeholder="Alguma restrição alimentar, pedido especial..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary" style="width:100%;margin-top:.5rem">Confirmar
-                        Reserva</button>
-                </form>
-                <div class="success-msg" id="reservaSuccess">
-                    <div class="success-icon">✅</div>
-                    <h3>Reserva Confirmada!</h3>
-                    <p id="reservaResumo"></p>
-                    <button class="btn btn--outline" onclick="novaReserva()">Fazer nova reserva</button>
-                </div>
-            </div>
-
-            <!--lista de reservass salvas. -->
-            <div id="reservaListWrap" style="display:none;margin-top:2rem">
-                <h3 style="color:var(--red);margin-bottom:1rem">📋 Reservas Registradas</h3>
-                <div id="reservaList"></div>
-            </div>
-        </div>
-    </section>
-
-    <!--fazer cadastro-> -->
-    <section class="page" id="cadastro">
-        <div class="page-hero page-hero--dark">
-            <h1>Cadastro</h1>
-            <p>Faça parte do Clube Brasa & Arte</p>
-        </div>
-        <div class="container" style="padding:3rem 1rem;max-width:640px">
-            <div class="form-card">
-                <h2 class="section__title" style="margin-bottom:.5rem">Criar Conta</h2>
-                <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Receba promoções exclusivas e acumule pontos
-                    a cada visita.</p>
-                <form id="cadastroForm" onsubmit="submeterCadastro(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <input type="text" class="input" id="cadNome" placeholder="Seu nome" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Sobrenome</label>
-                            <input type="text" class="input" id="cadSobre" placeholder="Sobrenome" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="email" class="input" id="cadEmail" placeholder="email@exemplo.com" required />
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="tel" class="input" id="cadTel" placeholder="(91) 99999-0000" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Data de Nascimento</label>
-                            <input type="date" class="input" id="cadNasc" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <input type="password" class="input" id="cadSenha" placeholder="Mínimo 6 caracteres" required
-                            minlength="6" />
-                    </div>
-                    <div class="form-group">
-                        <label>Confirmar Senha</label>
-                        <input type="password" class="input" id="cadSenha2" placeholder="Repita a senha" required />
-                    </div>
-                    <div class="form-group checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="cadTermos" required />
-                            Aceito receber promoções e novidades do Brasa & Arte
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn--primary" style="width:100%;margin-top:.5rem">Criar
-                        Conta</button>
-                </form>
-                <div class="success-msg" id="cadastroSuccess">
-                    <div class="success-icon">🎉</div>
-                    <h3 id="cadastroNomeMsg">Bem-vindo(a)!</h3>
-                    <p>Sua conta foi criada com sucesso. Aproveite nossas promoções exclusivas!</p>
-                    <button class="btn btn--outline" onclick="verClientes()">Ver clientes cadastrados</button>
-                </div>
-            </div>
-
-            <!--tabela de clientes salvos.-->
-            <div id="clientesWrap" style="display:none;margin-top:2rem">
-                <h3 style="color:var(--red);margin-bottom:1rem">👥 Clientes Cadastrados</h3>
-                <div class="table-wrap">
-                    <table class="data-table" id="clientesTable">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>Cadastro</th>
-                            </tr>
-                        </thead>
-                        <tbody id="clientesTbody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </section>
 
     <script src="script.js"></script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brasa & Arte — Delivery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <nav class="nav" id="nav">
+        <a class="nav__logo" href="index.html">Brasa<span>&</span>Arte</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="index.html" class="nav__link" data-page="home">Início</a></li>
+            <li><a href="cardapio.html" class="nav__link" data-page="cardapio">Cardápio</a></li>
+            <li><a href="delivery.html" class="nav__link active" data-page="delivery">Delivery</a></li>
+            <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
+            <li><a href="cadastro.html" class="nav__link" data-page="cadastro">Cadastro</a></li>
+        </ul>
+    </nav>
+
+
+    <section class="page active" id="delivery">
+        <div class="page-hero page-hero--dark">
+            <h1>Delivery</h1>
+            <p>Na sua casa em até 45 minutos</p>
+        </div>
+        <div class="container delivery-layout">
+            <div class="cart-side">
+                <h2 class="section__title" style="text-align:left">Monte seu Pedido</h2>
+                <div class="delivery-tabs" id="deliveryTabs">
+                    <button class="tab active" data-dcat="carnes">Carnes</button>
+                    <button class="tab" data-dcat="peixes">Peixes</button>
+                    <button class="tab" data-dcat="entradas">Entradas</button>
+                    <button class="tab" data-dcat="bebidas">Bebidas</button>
+                </div>
+                <div class="delivery-items" id="deliveryItems"></div>
+            </div>
+            <div class="cart-panel" id="cartPanel">
+                <h3>🛒 Seu Pedido</h3>
+                <div class="cart-list" id="cartList">
+                    <p class="cart-empty">Nenhum item adicionado ainda.</p>
+                </div>
+                <div class="cart-total" id="cartTotal" style="display:none">
+                    <div class="cart-subtotal">
+                        <span>Subtotal</span><span id="subtotalVal">R$ 0,00</span>
+                    </div>
+                    <div class="cart-subtotal">
+                        <span>Entrega</span><span>R$ 8,00</span>
+                    </div>
+                    <div class="cart-subtotal cart-subtotal--bold">
+                        <span>Total</span><span id="totalVal">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="cart-form" id="cartForm" style="display:none">
+                    <input type="text" class="input" id="delivName" placeholder="Seu nome" required />
+                    <input type="tel" class="input" id="delivPhone" placeholder="Telefone" required />
+                    <input type="text" class="input" id="delivAddr" placeholder="Endereço completo" required />
+                    <select class="input" id="delivPay">
+                        <option value="">Forma de pagamento</option>
+                        <option>Dinheiro</option>
+                        <option>Cartão (maquininha)</option>
+                        <option>Pix</option>
+                    </select>
+                    <button class="btn btn--primary" style="width:100%" onclick="finalizarPedido()">Finalizar
+                        Pedido</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
