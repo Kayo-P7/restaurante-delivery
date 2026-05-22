@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brasa & Arte — Restaurante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+
+    <nav class="nav" id="nav">
+        <a class="nav__logo" href="index.html">Brasa<span>&</span>Arte</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="index.html" class="nav__link active" data-page="home">Início</a></li>
+            <li><a href="cardapio.html" class="nav__link" data-page="cardapio">Cardápio</a></li>
+            <li><a href="delivery.html" class="nav__link" data-page="delivery">Delivery</a></li>
+            <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
+            <li><a href="cadastro.html" class="nav__link" data-page="cadastro">Cadastro</a></li>
+        </ul>
+    </nav>
+
+
+    <section class="page active" id="home">
+        <div class="hero">
+            <div class="hero__bg">
+                <div class="hero__circle hero__circle--1"></div>
+                <div class="hero__circle hero__circle--2"></div>
+                <div class="hero__grain"></div>
+            </div>
+            <div class="hero__content">
+                <p class="hero__tag">Desde 2008 — Belém, Pará</p>
+                <h1 class="hero__title">Onde o fogo<br /><em>vira arte</em></h1>
+                <p class="hero__sub">Churrasco premium, sabores amazônicos e experiências que ficam na memória. Venha
+                    viver o Brasa & Arte.</p>
+                <div class="hero__btns">
+                    <a class="btn btn--primary" href="cardapio.html">Ver Cardápio</a>
+                    <a class="btn btn--outline" href="reservas.html">Fazer Reserva</a>
+                </div>
+            </div>
+            <div class="hero__badge">
+                <div class="hero__badge-inner">
+                    <span>⭐ 4.9</span>
+                    <small>+2.000 avaliações</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature__icon">🔥</div>
+                <h3>Brasa Viva</h3>
+                <p>Carnes selecionadas no fogo de brasa artesanal, com defumação própria.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">🚚</div>
+                <h3>Delivery Rápido</h3>
+                <p>Entregamos em até 45 min para toda região metropolitana de Belém.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">🍷</div>
+                <h3>Ambiente Único</h3>
+                <p>Espaço exclusivo para eventos, jantares românticos e confraternizações.</p>
+            </div>
+        </div>
+
+        <!--destaques. -->
+        <div class="section section--light">
+            <div class="container">
+                <h2 class="section__title">Destaques da Casa</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card__img card__img--1"></div>
+                        <div class="card__body">
+                            <span class="card__tag">Carne</span>
+                            <h4>Picanha na Brasa</h4>
+                            <p>Corte nobre grelhado no fogo vivo, servido com farofa da casa.</p>
+                            <strong>R$ 89,90</strong>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card__img card__img--2"></div>
+                        <div class="card__body">
+                            <span class="card__tag">Especial</span>
+                            <h4>Costela 12h</h4>
+                            <p>Costela bovina assada por 12 horas, desfiada e irresistível.</p>
+                            <strong>R$ 74,90</strong>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card__img card__img--3"></div>
+                        <div class="card__body">
+                            <span class="card__tag">Amazônico</span>
+                            <h4>Tambaqui Grelhado</h4>
+                            <p>Peixe regional temperado com ervas da floresta e limão cravo.</p>
+                            <strong>R$ 65,00</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container footer__grid">
+                <div>
+                    <div class="nav__logo" style="font-size:1.4rem;margin-bottom:.5rem">Brasa<span>&</span>Arte</div>
+                    <p>Av. Nazaré, 1200 — Belém, PA</p>
+                    <p>(91) 99999-0000</p>
+                </div>
+                <div>
+                    <h5>Horários</h5>
+                    <p>Seg–Sex: 11h–23h</p>
+                    <p>Sáb–Dom: 11h–00h</p>
+                </div>
+                <div>
+                    <h5>Links</h5>
+                    <p><a href="cardapio.html">Cardápio</a></p>
+                    <p><a href="delivery.html">Delivery</a></p>
+                    <p><a href="reservas.html">Reservas</a></p>
+                </div>
+            </div>
+            <div class="footer__copy">© 2025 Brasa & Arte. Todos os direitos reservados.</div>
+        </footer>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/navegacao.js"></script>
+    <script src="assets/js/cardapio.js"></script>
+    <script src="assets/js/delivery.js"></script>
+    <script src="assets/js/reservas.js"></script>
+    <script src="assets/js/cadastro.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

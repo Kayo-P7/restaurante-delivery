@@ -1,0 +1,20 @@
+REQUISITOS DO PROJETO
+
+Páginas:
+- Principal
+- Cardápio
+- Reservas
+- Delivery
+- Contato
+
+Funcionalidades:
+- Sistema de reservas
+- Exibição do cardápio
+- Responsividade
+- Hospedagem online
+
+Tecnologias:
+- HTML
+- CSS
+- JavaScript
+- MySQL

@@ -1,0 +1,25 @@
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.menu-item {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: box-shadow var(--transition);
+}
+.menu-item:hover { box-shadow: var(--shadow); }
+.menu-item__info h4 { font-family: var(--font-display); margin-bottom: .3rem; }
+.menu-item__info p { color: var(--gray); font-size: .85rem; }
+.menu-item__price {
+  font-weight: 700;
+  color: var(--red);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}

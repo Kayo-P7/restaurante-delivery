@@ -1,0 +1,16 @@
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+.data-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.data-table th {
+  background: var(--red);
+  color: white;
+  padding: .75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+.data-table td {
+  padding: .7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: var(--cream); }
