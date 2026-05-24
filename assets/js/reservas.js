@@ -4,9 +4,10 @@ function initReservas() {
 
   const today = new Date().toISOString().split("T")[0];
   $resData.attr("min", today);
+  renderReservaList();
 }
 
-function submeterReserva(e) {
+async function submeterReserva(e) {
   e.preventDefault();
 
   const nome = $("#resNome").val().trim();
@@ -24,26 +25,27 @@ function submeterReserva(e) {
 
   const reserva = {
     nome,
-    tel,
-    data,
+    telefone: tel,
+    data_reserva: data,
     horario,
-    pessoas,
-    ocasiao: ocasiao || "—",
-    obs: obs || "—",
-    registradoEm: new Date().toLocaleString("pt-BR"),
+    quantidade_pessoas: Number(pessoas),
+    ocasiao: ocasiao || null,
+    obs: obs || null,
   };
 
-  const reservas = JSON.parse(localStorage.getItem("brasaReservas") || "[]");
-  reservas.push(reserva);
-  localStorage.setItem("brasaReservas", JSON.stringify(reservas));
+  try {
+    await enviarParaApi("/reservas", reserva);
 
-  $("#reservaForm").hide();
-  $("#reservaSuccess").addClass("show");
+    $("#reservaForm").hide();
+    $("#reservaSuccess").addClass("show");
 
-  const dataFmt = new Date(data + "T12:00:00").toLocaleDateString("pt-BR");
-  $("#reservaResumo").text(`${nome}, sua mesa para ${pessoas} pessoa(s) está reservada para ${dataFmt} às ${horario}. Aguardamos você!`);
+    const dataFmt = new Date(data + "T12:00:00").toLocaleDateString("pt-BR");
+    $("#reservaResumo").text(`${nome}, sua mesa para ${pessoas} pessoa(s) está reservada para ${dataFmt} às ${horario}. Aguardamos você!`);
 
-  renderReservaList();
+    renderReservaList();
+  } catch (erro) {
+    alert(`Erro ao salvar reserva: ${erro.message}`);
+  }
 }
 
 function novaReserva() {
@@ -52,28 +54,34 @@ function novaReserva() {
   $("#reservaSuccess").removeClass("show");
 }
 
-function renderReservaList() {
-  const reservas = JSON.parse(localStorage.getItem("brasaReservas") || "[]");
+async function renderReservaList() {
   const $wrap = $("#reservaListWrap");
   const $list = $("#reservaList");
   if (!$wrap.length || !$list.length) return;
 
-  if (reservas.length === 0) {
-    $wrap.hide();
-    return;
+  try {
+    const reservas = await buscarNaApi("/reservas");
+
+    if (reservas.length === 0) {
+      $wrap.hide();
+      return;
+    }
+
+    const html = reservas.slice(0, 10).map(r => `
+      <div class="reserva-item">
+        <div><strong>Nome:</strong> ${r.nome}</div>
+        <div><strong>Telefone:</strong> ${r.telefone}</div>
+        <div><strong>Data:</strong> ${new Date(r.data_reserva).toLocaleDateString("pt-BR")}</div>
+        <div><strong>Horário:</strong> ${String(r.horario).slice(0, 5)}</div>
+        <div><strong>Pessoas:</strong> ${r.quantidade_pessoas}</div>
+        <div><strong>Ocasião:</strong> ${r.ocasiao || "—"}</div>
+      </div>
+    `).join("");
+
+    $wrap.show();
+    $list.html(html);
+  } catch (erro) {
+    $wrap.show();
+    $list.html(`<p style="color:#b91c1c">${erro.message}</p>`);
   }
-
-  const html = [...reservas].reverse().slice(0, 10).map(r => `
-    <div class="reserva-item">
-      <div><strong>Nome:</strong> ${r.nome}</div>
-      <div><strong>Telefone:</strong> ${r.tel}</div>
-      <div><strong>Data:</strong> ${new Date(r.data + "T12:00:00").toLocaleDateString("pt-BR")}</div>
-      <div><strong>Horário:</strong> ${r.horario}</div>
-      <div><strong>Pessoas:</strong> ${r.pessoas}</div>
-      <div><strong>Ocasião:</strong> ${r.ocasiao}</div>
-    </div>
-  `).join("");
-
-  $wrap.show();
-  $list.html(html);
 }

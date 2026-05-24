@@ -1,15 +1,35 @@
-CREATE TABLE clientes (
+CREATE DATABASE IF NOT EXISTS restaurante_delivery;
+USE restaurante_delivery;
+
+CREATE TABLE IF NOT EXISTS clientes (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    telefone VARCHAR(20),
-    email VARCHAR(100)
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    nascimento DATE NULL,
+    senha VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE reservas (
+CREATE TABLE IF NOT EXISTS reservas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    cliente_id INT,
-    data_reserva DATE,
-    horario TIME,
-    quantidade_pessoas INT,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    data_reserva DATE NOT NULL,
+    horario TIME NOT NULL,
+    quantidade_pessoas INT NOT NULL,
+    ocasiao VARCHAR(100) NULL,
+    obs TEXT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    pagamento VARCHAR(50) NOT NULL,
+    itens TEXT NOT NULL,
+    total VARCHAR(30) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

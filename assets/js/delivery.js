@@ -103,7 +103,7 @@ function renderCart() {
   $("#totalVal").text(moeda(total));
 }
 
-function finalizarPedido() {
+async function finalizarPedido() {
   const nome = $("#delivName").val().trim();
   const phone = $("#delivPhone").val().trim();
   const addr = $("#delivAddr").val().trim();
@@ -123,14 +123,25 @@ function finalizarPedido() {
   const subtotal = Object.values(cart).reduce((s, { item, qty }) => s + item.preco * qty, 0);
   const total = moeda(subtotal + 8);
 
-  const pedidos = JSON.parse(localStorage.getItem("brasaPedidos") || "[]");
-  pedidos.push({ nome, phone, addr, pay, itens, total, data: new Date().toLocaleString("pt-BR") });
-  localStorage.setItem("brasaPedidos", JSON.stringify(pedidos));
+  const pedido = {
+    nome,
+    telefone: phone,
+    endereco: addr,
+    pagamento: pay,
+    itens,
+    total,
+  };
 
-  alert(`✅ Pedido confirmado!\n\nOlá, ${nome}! Seu pedido foi recebido.\nItens: ${itens}\nTotal: ${total}\nTempo estimado: 35–45 min\n\nObrigado! 🔥`);
+  try {
+    await enviarParaApi("/pedidos", pedido);
 
-  cart = {};
-  $("#delivName, #delivPhone, #delivAddr").val("");
-  $("#delivPay").val("");
-  renderCart();
+    alert(`✅ Pedido confirmado!\n\nOlá, ${nome}! Seu pedido foi recebido.\nItens: ${itens}\nTotal: ${total}\nTempo estimado: 35–45 min\n\nObrigado! 🔥`);
+
+    cart = {};
+    $("#delivName, #delivPhone, #delivAddr").val("");
+    $("#delivPay").val("");
+    renderCart();
+  } catch (erro) {
+    alert(`Erro ao salvar pedido: ${erro.message}`);
+  }
 }
