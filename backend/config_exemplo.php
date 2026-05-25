@@ -1,8 +1,8 @@
 <?php
 
 // configuraçoes do banco de dados.
-define('DB_HOST', 'root');
-define('DB_USER', 'localhost');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'restaurante_database');
 
