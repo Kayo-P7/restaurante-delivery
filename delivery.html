@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brasa & Arte — Delivery</title>
+    <title>Brasa &amp; Arte — Delivery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        .btn--danger { background:#b91c1c; color:#fff; border-color:#b91c1c; font-size:.8rem; padding:.3rem .7rem; }
+        .btn--danger:hover { background:#991b1b; }
+        .btn--sm { padding:.3rem .8rem; font-size:.82rem; }
+    </style>
 </head>
 
 <body>
@@ -21,14 +24,13 @@
             <span></span><span></span><span></span>
         </button>
         <ul class="nav__links" id="navLinks">
-            <li><a href="index.html" class="nav__link" data-page="home">Início</a></li>
+            <li><a href="index.html"    class="nav__link" data-page="home">Início</a></li>
             <li><a href="cardapio.html" class="nav__link" data-page="cardapio">Cardápio</a></li>
             <li><a href="delivery.html" class="nav__link active" data-page="delivery">Delivery</a></li>
             <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
             <li><a href="cadastro.html" class="nav__link" data-page="cadastro">Cadastro</a></li>
         </ul>
     </nav>
-
 
     <section class="page active" id="delivery">
         <div class="page-hero page-hero--dark">
@@ -72,9 +74,16 @@
                         <option>Cartão (maquininha)</option>
                         <option>Pix</option>
                     </select>
-                    <button class="btn btn--primary" style="width:100%" onclick="finalizarPedido()">Finalizar
-                        Pedido</button>
+                    <button class="btn btn--primary" style="width:100%" onclick="finalizarPedido()">Finalizar Pedido</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- ── Histórico de pedidos ── -->
+        <div class="container" style="padding:2rem 1rem">
+            <div id="pedidosWrap" style="display:none">
+                <h3 style="color:var(--red);margin-bottom:1rem">📋 Pedidos Realizados</h3>
+                <div id="pedidosList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem"></div>
             </div>
         </div>
     </section>
@@ -89,6 +98,12 @@
     <script src="assets/js/reservas.js"></script>
     <script src="assets/js/cadastro.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            atualizarEstadoLogin();
+            renderPedidosList();
+        });
+    </script>
 </body>
 
 </html>

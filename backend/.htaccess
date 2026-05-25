@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /backend/
+
+# Redirecionar /api/clientes → /backend/api/clientes.php
+RewriteRule ^api/clientes/?$ api/clientes.php [L,QSA]
+RewriteRule ^api/login/?$    api/login.php    [L,QSA]
+RewriteRule ^api/reservas/?$ api/reservas.php [L,QSA]
+RewriteRule ^api/pedidos/?$  api/pedidos.php  [L,QSA]

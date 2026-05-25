@@ -4,5 +4,6 @@ $(document).ready(function () {
   initDelivery();
   initReservas();
   renderReservaList();
-  renderClientesTable();
+  // Atualizar estado de login em todas as páginas
+  if (typeof atualizarEstadoLogin === 'function') atualizarEstadoLogin();
 });

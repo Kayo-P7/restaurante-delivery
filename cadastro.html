@@ -4,13 +4,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brasa & Arte — Cadastro</title>
+    <title>Brasa &amp; Arte — Cadastro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        .tab-toggle { display:flex; gap:.5rem; margin-bottom:1.5rem; }
+        .tab-toggle .tab { flex:1; padding:.6rem; font-size:.9rem; cursor:pointer; }
+        .painel-usuario { background:#1a1a1a; border-radius:12px; padding:2rem; text-align:center; }
+        .painel-usuario h3 { color:var(--gold, #c8922a); margin-bottom:.5rem; font-size:1.4rem; }
+        .painel-usuario p  { color:#aaa; margin-bottom:1.5rem; }
+        .painel-acoes { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1rem; }
+        .btn--danger { background:#b91c1c; color:#fff; border-color:#b91c1c; }
+        .btn--danger:hover { background:#991b1b; }
+        .nav__user { display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; }
+        .btn-logout { background:transparent; border:1px solid #888; color:#ccc; padding:.2rem .6rem; border-radius:6px; cursor:pointer; font-size:.8rem; }
+        .btn-logout:hover { background:#333; }
+    </style>
 </head>
 
 <body>
@@ -21,7 +32,7 @@
             <span></span><span></span><span></span>
         </button>
         <ul class="nav__links" id="navLinks">
-            <li><a href="index.html" class="nav__link" data-page="home">Início</a></li>
+            <li><a href="index.html"    class="nav__link" data-page="home">Início</a></li>
             <li><a href="cardapio.html" class="nav__link" data-page="cardapio">Cardápio</a></li>
             <li><a href="delivery.html" class="nav__link" data-page="delivery">Delivery</a></li>
             <li><a href="reservas.html" class="nav__link" data-page="reservas">Reservas</a></li>
@@ -29,17 +40,66 @@
         </ul>
     </nav>
 
-
     <section class="page active" id="cadastro">
         <div class="page-hero page-hero--dark">
-            <h1>Cadastro</h1>
-            <p>Faça parte do Clube Brasa & Arte</p>
+            <h1>Minha Conta</h1>
+            <p>Acesse ou crie sua conta no Clube Brasa &amp; Arte</p>
         </div>
         <div class="container" style="padding:3rem 1rem;max-width:640px">
-            <div class="form-card">
+
+            <!-- ── PAINEL DO USUÁRIO LOGADO ── -->
+            <div id="painelUsuario" style="display:none">
+                <div class="painel-usuario">
+                    <div style="font-size:3rem">👤</div>
+                    <h3 id="saudacaoUsuario">Olá!</h3>
+                    <p>Você está logado(a) no Clube Brasa &amp; Arte.<br>Aproveite nossas promoções exclusivas!</p>
+                    <div class="painel-acoes">
+                        <button class="btn btn--outline" onclick="verClientes()">👥 Ver clientes</button>
+                        <button class="btn btn--outline" onclick="fazerLogout()">🚪 Sair</button>
+                        <button class="btn btn--danger" onclick="excluirConta()">🗑 Excluir minha conta</button>
+                    </div>
+                </div>
+
+                <!-- Tabela admin de clientes -->
+                <div id="clientesWrap" style="display:none;margin-top:2rem">
+                    <h3 style="color:var(--red);margin-bottom:1rem">👥 Clientes Cadastrados</h3>
+                    <div class="table-wrap">
+                        <table class="data-table" id="clientesTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Telefone</th>
+                                    <th>Cadastro</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientesTbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── FORMULÁRIOS: LOGIN + CADASTRO (visíveis apenas se não logado) ── -->
+            <div id="loginWrap" class="form-card" style="margin-bottom:1.5rem">
+                <h2 class="section__title" style="margin-bottom:.5rem">Entrar</h2>
+                <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Já tem conta? Faça login aqui.</p>
+                <form id="loginForm" onsubmit="submeterLogin(event)">
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" class="input" id="loginEmail" placeholder="email@exemplo.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" class="input" id="loginSenha" placeholder="Sua senha" required />
+                    </div>
+                    <button type="submit" class="btn btn--primary" style="width:100%;margin-top:.5rem">Entrar</button>
+                </form>
+            </div>
+
+            <div id="cadastroFormWrap" class="form-card">
                 <h2 class="section__title" style="margin-bottom:.5rem">Criar Conta</h2>
-                <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Receba promoções exclusivas e acumule pontos
-                    a cada visita.</p>
+                <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Não tem conta? Cadastre-se gratuitamente.</p>
                 <form id="cadastroForm" onsubmit="submeterCadastro(event)">
                     <div class="form-row">
                         <div class="form-group">
@@ -62,13 +122,12 @@
                         </div>
                         <div class="form-group">
                             <label>Data de Nascimento</label>
-                            <input type="date" class="input" id="cadNasc" required />
+                            <input type="date" class="input" id="cadNasc" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <input type="password" class="input" id="cadSenha" placeholder="Mínimo 6 caracteres" required
-                            minlength="6" />
+                        <input type="password" class="input" id="cadSenha" placeholder="Mínimo 6 caracteres" required minlength="6" />
                     </div>
                     <div class="form-group">
                         <label>Confirmar Senha</label>
@@ -77,37 +136,13 @@
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="cadTermos" required />
-                            Aceito receber promoções e novidades do Brasa & Arte
+                            Aceito receber promoções e novidades do Brasa &amp; Arte
                         </label>
                     </div>
-                    <button type="submit" class="btn btn--primary" style="width:100%;margin-top:.5rem">Criar
-                        Conta</button>
+                    <button type="submit" class="btn btn--primary" style="width:100%;margin-top:.5rem">Criar Conta</button>
                 </form>
-                <div class="success-msg" id="cadastroSuccess">
-                    <div class="success-icon">🎉</div>
-                    <h3 id="cadastroNomeMsg">Bem-vindo(a)!</h3>
-                    <p>Sua conta foi criada com sucesso. Aproveite nossas promoções exclusivas!</p>
-                    <button class="btn btn--outline" onclick="verClientes()">Ver clientes cadastrados</button>
-                </div>
             </div>
 
-            <!--tabela de clientes salvos.-->
-            <div id="clientesWrap" style="display:none;margin-top:2rem">
-                <h3 style="color:var(--red);margin-bottom:1rem">👥 Clientes Cadastrados</h3>
-                <div class="table-wrap">
-                    <table class="data-table" id="clientesTable">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>Cadastro</th>
-                            </tr>
-                        </thead>
-                        <tbody id="clientesTbody"></tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -121,6 +156,12 @@
     <script src="assets/js/reservas.js"></script>
     <script src="assets/js/cadastro.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        // Verificar login ao carregar a página
+        $(document).ready(function() {
+            atualizarEstadoLogin();
+        });
+    </script>
 </body>
 
 </html>

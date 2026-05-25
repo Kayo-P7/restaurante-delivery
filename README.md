@@ -1,91 +1,89 @@
-# Brasa & Arte - Restaurante Delivery
+# Brasa & Arte — Restaurante Delivery
 
-Projeto de site para restaurante com páginas de Início, Cardápio, Delivery, Reservas e Cadastro.
+Sistema completo de restaurante com delivery, reservas e cadastro de clientes.
 
-## O que foi ajustado
+## Stack
 
-Agora o projeto possui conexão com banco de dados usando:
+- **Frontend**: HTML, CSS, JavaScript (jQuery)
+- **Backend**: PHP 7.4+ com MySQLi
+- **Banco**: MySQL / MariaDB
 
-- Front-end: HTML, CSS, JavaScript e jQuery
-- Backend: Node.js + Express
-- Banco de dados: MySQL
+## Estrutura de arquivos
 
-Antes, os dados ficavam apenas no `localStorage` do navegador. Agora cadastro de clientes, reservas e pedidos são enviados para a API e salvos no MySQL.
-
-## Estrutura importante
-
-```text
-backend/
-├── server.js
-├── db.js
-├── package.json
-├── .env.example
-└── README.md
-
-database/
-└── restaurante.sql
-
-assets/js/
-├── api.js
-├── cadastro.js
-├── delivery.js
-└── reservas.js
+```
+restaurante-delivery/
+├── backend/
+│   ├── config.php          ← Configurações do banco (editar aqui)
+│   ├── .htaccess           ← Roteamento da API
+│   └── api/
+│       ├── clientes.php    ← GET / POST / DELETE clientes
+│       ├── login.php       ← POST login
+│       ├── reservas.php    ← GET / POST / DELETE reservas
+│       └── pedidos.php     ← GET / POST / DELETE pedidos
+├── assets/
+│   ├── css/                ← Estilos do projeto
+│   └── js/
+│       ├── api.js          ← Funções HTTP (aponta para PHP)
+│       ├── cadastro.js     ← Login, cadastro, excluir conta
+│       ├── delivery.js     ← Carrinho, pedidos, excluir pedido
+│       ├── reservas.js     ← Reservas, excluir reserva
+│       └── ...
+├── database/
+│   └── restaurante.sql     ← Script de criação do banco
+├── index.html
+├── cadastro.html
+├── cardapio.html
+├── delivery.html
+└── reservas.html
 ```
 
-## Como rodar o projeto
+## Como rodar
 
-### 1. Criar o banco de dados
-
-Na pasta principal do projeto, rode:
-
-```bash
-mysql -u root -p < database/restaurante.sql
+### 1. Banco de dados
+```sql
+-- Execute no MySQL/MariaDB:
+source database/restaurante.sql
 ```
 
-### 2. Configurar o backend
-
-Entre na pasta do backend:
-
-```bash
-cd backend
+### 2. Configuração PHP
+Edite `backend/config_exemplo.php` com seus dados:
+```php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', 'sua_senha');
+define('DB_NAME', 'restaurante_delivery');
 ```
 
-Instale as dependências:
+### 3. Servidor
+Coloque a pasta num servidor Apache/PHP (XAMPP, WAMP, Laragon).  
+Acesse `http://localhost/restaurante-delivery/`.
 
-```bash
-npm install
-```
+Se o mod_rewrite não estiver ativo, acesse a API diretamente por `/backend/api/pedidos.php`.
 
-Crie o arquivo `.env`:
+## Funcionalidades
 
-```bash
-cp .env.example .env
-```
+| Recurso | Descrição |
+|---|---|
+| Cadastro de clientes | Formulário com validação e hash de senha |
+| Login / Logout | Sessão via `sessionStorage` |
+| Esconder cadastro após login | Formulários somem; exibe painel do usuário |
+| Excluir própria conta | Botão no painel do usuário logado |
+| Delivery / Carrinho | Adiciona itens, calcula total, finaliza pedido |
+| Excluir pedidos | Botão por pedido na lista de pedidos |
+| Reservas de mesa | Formulário completo com lista |
+| Excluir reservas | Botão por reserva na lista |
 
-Abra o `.env` e coloque sua senha do MySQL:
+## Endpoints PHP
 
-```text
-DB_PASSWORD=sua_senha_aqui
-```
-
-### 3. Ligar o servidor
-
-Dentro da pasta `backend`, rode:
-
-```bash
-npm start
-```
-
-Se der certo, vai aparecer:
-
-```text
-Servidor rodando em http://localhost:3000
-```
-
-### 4. Abrir o site
-
-Com o servidor ligado, abra o arquivo `index.html` no navegador.
-
-## Observação
-
-O site precisa do backend rodando para salvar no banco. Se o servidor estiver desligado, cadastro, reserva e pedido vão mostrar erro de conexão.
+| Método | URL | Descrição |
+|---|---|---|
+| POST | `/backend/api/clientes.php` | Criar cliente |
+| GET  | `/backend/api/clientes.php` | Listar clientes |
+| DELETE | `/backend/api/clientes.php?id=X` | Excluir cliente |
+| POST | `/backend/api/login.php` | Login |
+| POST | `/backend/api/reservas.php` | Criar reserva |
+| GET  | `/backend/api/reservas.php` | Listar reservas |
+| DELETE | `/backend/api/reservas.php?id=X` | Excluir reserva |
+| POST | `/backend/api/pedidos.php` | Criar pedido |
+| GET  | `/backend/api/pedidos.php` | Listar pedidos |
+| DELETE | `/backend/api/pedidos.php?id=X` | Excluir pedido |

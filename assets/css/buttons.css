@@ -42,3 +42,40 @@
   color: white;
 }
 .btn--sm { padding: .5rem 1.2rem; font-size: .88rem; }
+
+/* Botão destrutivo */
+.btn--danger {
+  background: #b91c1c;
+  color: #fff;
+  border-color: #b91c1c;
+}
+.btn--danger:hover {
+  background: #991b1b;
+}
+
+/* Botão pequeno */
+.btn--sm {
+  padding: .28rem .7rem;
+  font-size: .8rem;
+}
+
+/* Usuário logado na navbar */
+.nav__user {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: #fff;
+  font-size: .88rem;
+  padding: .3rem 0;
+}
+.btn-logout {
+  background: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  padding: .2rem .6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .78rem;
+  transition: background .2s;
+}
+.btn-logout:hover { background: #333; }
