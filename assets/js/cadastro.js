@@ -9,7 +9,7 @@ function limparUsuario() {
   sessionStorage.removeItem('usuario');
 }
 
-// ─── Atualizar navbar e seção cadastro com base no login ──────────────────────
+//atualizar navbar e seção cadastro com base no login 
 function atualizarEstadoLogin() {
   const u = getUsuario();
 
@@ -23,7 +23,7 @@ function atualizarEstadoLogin() {
       </span>
     `);
 
-    // Na página de cadastro: esconde formulário, mostra painel do usuário
+    // na página de cadastro: esconde formulário, mostra painel do usuário
     if ($('#cadastro').length) {
       $('#cadastroFormWrap').hide();
       $('#loginWrap').hide();
@@ -44,7 +44,7 @@ function fazerLogout() {
   location.reload();
 }
 
-// ─── Login ────────────────────────────────────────────────────────────────────
+//login
 async function submeterLogin(e) {
   e.preventDefault();
   const email = $('#loginEmail').val().trim();
@@ -61,7 +61,7 @@ async function submeterLogin(e) {
   }
 }
 
-// ─── Cadastro ─────────────────────────────────────────────────────────────────
+// cadastro.
 async function submeterCadastro(e) {
   e.preventDefault();
 
@@ -99,7 +99,7 @@ async function submeterCadastro(e) {
   }
 }
 
-// ─── Excluir conta ────────────────────────────────────────────────────────────
+// exluir conta do usuário logado.
 async function excluirConta() {
   const u = getUsuario();
   if (!u) return;
@@ -116,7 +116,7 @@ async function excluirConta() {
   }
 }
 
-// ─── Tabela de clientes (admin) ───────────────────────────────────────────────
+//tabela de clientes para admin
 async function verClientes() {
   await renderClientesTable();
   $('#clientesWrap').show();

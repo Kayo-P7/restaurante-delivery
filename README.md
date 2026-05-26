@@ -2,13 +2,13 @@
 
 Sistema completo de restaurante com delivery, reservas e cadastro de clientes.
 
-## Stack
+# Tecnologias
 
 - **Frontend**: HTML, CSS, JavaScript (jQuery)
 - **Backend**: PHP 7.4+ com MySQLi
 - **Banco**: MySQL / MariaDB
 
-## Estrutura de arquivos
+ Estrutura de arquivos
 
 ```
 restaurante-delivery/
@@ -37,15 +37,15 @@ restaurante-delivery/
 └── reservas.html
 ```
 
-## Como rodar
+# Como rodar
 
-### 1. Banco de dados
+# 1. Banco de dados
 ```sql
--- Execute no MySQL/MariaDB:
+-- execute no MySQL: 
 source database/restaurante.sql
 ```
 
-### 2. Configuração PHP
+# 2. Configuração PHP
 Edite `backend/config_exemplo.php` com seus dados:
 ```php
 define('DB_HOST', 'localhost');
@@ -54,13 +54,12 @@ define('DB_PASS', 'sua_senha');
 define('DB_NAME', 'restaurante_delivery');
 ```
 
-### 3. Servidor
+# 3. Servidor
 Coloque a pasta num servidor Apache/PHP (XAMPP, WAMP, Laragon).  
 Acesse `http://localhost/restaurante-delivery/`.
 
-Se o mod_rewrite não estiver ativo, acesse a API diretamente por `/backend/api/pedidos.php`.
 
-## Funcionalidades
+# Funcionalidades
 
 | Recurso | Descrição |
 |---|---|

@@ -1,7 +1,7 @@
 function initDelivery() {
   if (!$('#deliveryTabs').length || !$('#deliveryItems').length) return;
 
-  // Pré-preencher nome e telefone se o user estiver logado
+  // ppré-preencher nome e telefone se o user estiver logado
   const u = getUsuario ? getUsuario() : null;
   if (u) {
     $('#delivName').val(u.nome);

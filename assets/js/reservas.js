@@ -6,7 +6,6 @@ function initReservas() {
   $resData.attr('min', today);
   renderReservaList();
 
-  // Pré-preencher se logado
   const u = getUsuario ? getUsuario() : null;
   if (u) {
     $('#resNome').val(u.nome);

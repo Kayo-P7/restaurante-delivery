@@ -1,4 +1,4 @@
-// URL base da API PHP
+// URL da API PHP
 const API_URL = `${window.location.origin}/restaurante-delivery/backend/api`;
 
 async function enviarParaApi(endpoint, dados) {
