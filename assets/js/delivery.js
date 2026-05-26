@@ -79,8 +79,7 @@ function renderCart() {
 
   if (items.length === 0) {
     $list.html("<p class='cart-empty'>Nenhum item adicionado ainda.</p>");
-    $totalWrap.hide();
-    $formWrap.hide();
+    setAlpineState('#delivery', { carrinhoTemItens: false });
     return;
   }
 
@@ -104,8 +103,7 @@ function renderCart() {
   const total = subtotal + delivery;
 
   $list.html(html);
-  $totalWrap.show();
-  $formWrap.css('display', 'flex');
+  setAlpineState('#delivery', { carrinhoTemItens: true });
   $('#subtotalVal').text(moeda(subtotal));
   $('#totalVal').text(moeda(total));
 }
@@ -157,7 +155,7 @@ async function renderPedidosList() {
     const pedidos = await buscarNaApi('/pedidos');
 
     if (pedidos.length === 0) {
-      $wrap.hide();
+      setAlpineState('#delivery', { pedidosVisiveis: false });
       return;
     }
 
@@ -176,10 +174,10 @@ async function renderPedidosList() {
       </div>
     `).join('');
 
-    $wrap.show();
+    setAlpineState('#delivery', { pedidosVisiveis: true });
     $list.html(html);
   } catch (erro) {
-    $wrap.show();
+    setAlpineState('#delivery', { pedidosVisiveis: true });
     $list.html(`<p style="color:#b91c1c">${erro.message}</p>`);
   }
 }

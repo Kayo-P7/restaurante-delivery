@@ -25,16 +25,12 @@ function atualizarEstadoLogin() {
 
     // na página de cadastro: esconde formulário, mostra painel do usuário
     if ($('#cadastro').length) {
-      $('#cadastroFormWrap').hide();
-      $('#loginWrap').hide();
-      $('#painelUsuario').show();
+      setAlpineState('#cadastro', { logado: true });
       $('#saudacaoUsuario').text(`Olá, ${u.nome.split(' ')[0]}! 👋`);
     }
   } else {
     if ($('#cadastro').length) {
-      $('#painelUsuario').hide();
-      $('#cadastroFormWrap').show();
-      $('#loginWrap').show();
+      setAlpineState('#cadastro', { logado: false, clientesVisiveis: false });
     }
   }
 }
@@ -119,7 +115,7 @@ async function excluirConta() {
 //tabela de clientes para admin
 async function verClientes() {
   await renderClientesTable();
-  $('#clientesWrap').show();
+  setAlpineState('#cadastro', { clientesVisiveis: true });
   $('#clientesWrap')[0].scrollIntoView({ behavior: 'smooth' });
 }
 

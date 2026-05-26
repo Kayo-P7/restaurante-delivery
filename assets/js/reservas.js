@@ -42,8 +42,7 @@ async function submeterReserva(e) {
   try {
     await enviarParaApi('/reservas', reserva);
 
-    $('#reservaForm').hide();
-    $('#reservaSuccess').addClass('show');
+    setAlpineState('#reservas', { sucesso: true });
 
     const dataFmt = new Date(data + 'T12:00:00').toLocaleDateString('pt-BR');
     $('#reservaResumo').text(
@@ -58,8 +57,7 @@ async function submeterReserva(e) {
 
 function novaReserva() {
   $('#reservaForm')[0].reset();
-  $('#reservaForm').show();
-  $('#reservaSuccess').removeClass('show');
+  setAlpineState('#reservas', { sucesso: false });
 }
 
 async function renderReservaList() {
@@ -71,7 +69,7 @@ async function renderReservaList() {
     const reservas = await buscarNaApi('/reservas');
 
     if (reservas.length === 0) {
-      $wrap.hide();
+      setAlpineState('#reservas', { listaVisivel: false });
       return;
     }
 
@@ -89,10 +87,10 @@ async function renderReservaList() {
       </div>
     `).join('');
 
-    $wrap.show();
+    setAlpineState('#reservas', { listaVisivel: true });
     $list.html(html);
   } catch (erro) {
-    $wrap.show();
+    setAlpineState('#reservas', { listaVisivel: true });
     $list.html(`<p style="color:#b91c1c">${erro.message}</p>`);
   }
 }

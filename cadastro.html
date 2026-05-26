@@ -21,6 +21,7 @@
         .nav__user { display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; }
         .btn-logout { background:transparent; border:1px solid #888; color:#ccc; padding:.2rem .6rem; border-radius:6px; cursor:pointer; font-size:.8rem; }
         .btn-logout:hover { background:#333; }
+        [x-cloak] { display:none !important; }
     </style>
 </head>
 
@@ -40,7 +41,7 @@
         </ul>
     </nav>
 
-    <section class="page active" id="cadastro">
+    <section class="page active" id="cadastro" x-data="{ logado: false, clientesVisiveis: false }">
         <div class="page-hero page-hero--dark">
             <h1>Minha Conta</h1>
             <p>Acesse ou crie sua conta no Clube Brasa &amp; Arte</p>
@@ -48,7 +49,7 @@
         <div class="container" style="padding:3rem 1rem;max-width:640px">
 
             <!--painel do usuário logado -->
-            <div id="painelUsuario" style="display:none">
+            <div id="painelUsuario" x-show="logado" x-cloak>
                 <div class="painel-usuario">
                     <div style="font-size:3rem">👤</div>
                     <h3 id="saudacaoUsuario">Olá!</h3>
@@ -61,7 +62,7 @@
                 </div>
 
                 <!-- tabela admin de clientes. -->
-                <div id="clientesWrap" style="display:none;margin-top:2rem">
+                <div id="clientesWrap" x-show="clientesVisiveis" x-cloak style="margin-top:2rem">
                     <h3 style="color:var(--red);margin-bottom:1rem">👥 Clientes Cadastrados</h3>
                     <div class="table-wrap">
                         <table class="data-table" id="clientesTable">
@@ -81,7 +82,7 @@
             </div>
 
             <!--formulário: login + cadastro (mostra somente se não estiver logado) -->
-            <div id="loginWrap" class="form-card" style="margin-bottom:1.5rem">
+            <div id="loginWrap" class="form-card" x-show="!logado" x-cloak style="margin-bottom:1.5rem">
                 <h2 class="section__title" style="margin-bottom:.5rem">Entrar</h2>
                 <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Já tem conta? Faça login aqui.</p>
                 <form id="loginForm" onsubmit="submeterLogin(event)">
@@ -97,7 +98,7 @@
                 </form>
             </div>
 
-            <div id="cadastroFormWrap" class="form-card">
+            <div id="cadastroFormWrap" class="form-card" x-show="!logado" x-cloak>
                 <h2 class="section__title" style="margin-bottom:.5rem">Criar Conta</h2>
                 <p style="color:#888;margin-bottom:1.5rem;font-size:.9rem">Não tem conta? Cadastre-se gratuitamente.</p>
                 <form id="cadastroForm" onsubmit="submeterCadastro(event)">
@@ -147,6 +148,7 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/data.js"></script>
     <script src="assets/js/utils.js"></script>

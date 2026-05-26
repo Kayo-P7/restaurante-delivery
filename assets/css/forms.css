@@ -47,7 +47,7 @@
 
 
 .success-msg {
-  display: none;
+  display: block;
   text-align: center;
   padding: 2rem 1rem;
 }

@@ -13,6 +13,7 @@
         .btn--danger { background:#b91c1c; color:#fff; border-color:#b91c1c; font-size:.8rem; padding:.3rem .7rem; }
         .btn--danger:hover { background:#991b1b; }
         .btn--sm { padding:.3rem .8rem; font-size:.82rem; }
+        [x-cloak] { display:none !important; }
     </style>
 </head>
 
@@ -32,7 +33,7 @@
         </ul>
     </nav>
 
-    <section class="page active" id="delivery">
+    <section class="page active" id="delivery" x-data="{ carrinhoTemItens: false, pedidosVisiveis: false }">
         <div class="page-hero page-hero--dark">
             <h1>Delivery</h1>
             <p>Na sua casa em até 45 minutos</p>
@@ -53,7 +54,7 @@
                 <div class="cart-list" id="cartList">
                     <p class="cart-empty">Nenhum item adicionado ainda.</p>
                 </div>
-                <div class="cart-total" id="cartTotal" style="display:none">
+                <div class="cart-total" id="cartTotal" x-show="carrinhoTemItens" x-cloak>
                     <div class="cart-subtotal">
                         <span>Subtotal</span><span id="subtotalVal">R$ 0,00</span>
                     </div>
@@ -64,7 +65,7 @@
                         <span>Total</span><span id="totalVal">R$ 0,00</span>
                     </div>
                 </div>
-                <div class="cart-form" id="cartForm" style="display:none">
+                <div class="cart-form" id="cartForm" x-show="carrinhoTemItens" x-cloak>
                     <input type="text" class="input" id="delivName" placeholder="Seu nome" required />
                     <input type="tel" class="input" id="delivPhone" placeholder="Telefone" required />
                     <input type="text" class="input" id="delivAddr" placeholder="Endereço completo" required />
@@ -81,7 +82,7 @@
 
         <!-- ── Histórico de pedidos ── -->
         <div class="container" style="padding:2rem 1rem">
-            <div id="pedidosWrap" style="display:none">
+            <div id="pedidosWrap" x-show="pedidosVisiveis" x-cloak>
                 <h3 style="color:var(--red);margin-bottom:1rem">📋 Pedidos Realizados</h3>
                 <div id="pedidosList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem"></div>
             </div>
@@ -89,6 +90,7 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/data.js"></script>
     <script src="assets/js/utils.js"></script>

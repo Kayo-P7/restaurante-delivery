@@ -1,35 +1,66 @@
 # Brasa & Arte — Restaurante Delivery
 
-Sistema completo de restaurante com delivery, reservas e cadastro de clientes.
+Sistema web completo para restaurante com funcionalidades de delivery, reservas de mesa, autenticação de usuários e gerenciamento de pedidos.
 
-# Tecnologias
+O projeto utiliza uma arquitetura simples e leve baseada em PHP + MySQL no backend e HTML, CSS, JavaScript, jQuery e Alpine.js no frontend.
 
-- **Frontend**: HTML, CSS, JavaScript (jQuery)
-- **Backend**: PHP 7.4+ com MySQLi
-- **Banco**: MySQL / MariaDB
+---
 
- Estrutura de arquivos
+# Tecnologias Utilizadas
 
-```
+## Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* jQuery
+* Alpine.js
+
+## Backend
+
+* PHP
+* MySQL
+
+## Banco de Dados
+
+* MySQL
+
+---
+
+# Estrutura do Projeto
+
+```bash
 restaurante-delivery/
+│
 ├── backend/
-│   ├── config.php          ← Configurações do banco (editar aqui)
-│   ├── .htaccess           ← Roteamento da API
+│   ├── config.php
+│   ├── config_exemplo.php
+│   ├── .htaccess
 │   └── api/
-│       ├── clientes.php    ← GET / POST / DELETE clientes
-│       ├── login.php       ← POST login
-│       ├── reservas.php    ← GET / POST / DELETE reservas
-│       └── pedidos.php     ← GET / POST / DELETE pedidos
+│       ├── clientes.php
+│       ├── login.php
+│       ├── reservas.php
+│       └── pedidos.php
+│
 ├── assets/
-│   ├── css/                ← Estilos do projeto
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── forms.css
+│   │   ├── delivery.css
+│   │   └── ...
+│   │
 │   └── js/
-│       ├── api.js          ← Funções HTTP (aponta para PHP)
-│       ├── cadastro.js     ← Login, cadastro, excluir conta
-│       ├── delivery.js     ← Carrinho, pedidos, excluir pedido
-│       ├── reservas.js     ← Reservas, excluir reserva
+│       ├── api.js
+│       ├── cadastro.js
+│       ├── delivery.js
+│       ├── reservas.js
+│       ├── navegacao.js
+│       ├── utils.js
 │       └── ...
+│
 ├── database/
-│   └── restaurante.sql     ← Script de criação do banco
+│   └── restaurante.sql
+│
 ├── index.html
 ├── cadastro.html
 ├── cardapio.html
@@ -37,52 +68,136 @@ restaurante-delivery/
 └── reservas.html
 ```
 
-# Como rodar
+---
 
-# 1. Banco de dados
+# Instalação e Configuração
+
+# 1. Configurar o banco de dados
+
+Crie um banco chamado:
+
 ```sql
--- execute no MySQL: 
+restaurante_delivery
+```
+
+Depois execute o script:
+
+```sql
 source database/restaurante.sql
 ```
 
-# 2. Configuração PHP
-Edite `backend/config_exemplo.php` com seus dados:
+Você também pode importar o arquivo `.sql` pelo phpMyAdmin ou MySQL Workbench.
+
+---
+
+## 2. Configurar conexão PHP
+
+Edite o arquivo:
+
+```bash
+backend/config_exemplo.php e renomeie para "config.php"
+```
+
+Exemplo:
+
 ```php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'sua_senha');
+define('DB_PASS', '');
 define('DB_NAME', 'restaurante_delivery');
 ```
 
-# 3. Servidor
-Coloque a pasta num servidor Apache/PHP (XAMPP, WAMP, Laragon).  
-Acesse `http://localhost/restaurante-delivery/`.
+---
 
+# Executando o Projeto
+
+## Requisitos
+
+* Apache
+* PHP 7.4+
+* MySQL/MariaDB
+
+Recomendado utilizar:
+
+* XAMPP
+* Laragon
+* WAMP
+
+---
+
+## Rodando localmente
+
+Coloque a pasta do projeto dentro do diretório do servidor.
+
+Exemplo no XAMPP:
+
+```bash
+htdocs/restaurante-delivery
+```
+
+Depois acesse:
+
+```bash
+http://localhost/restaurante-delivery/
+```
+
+---
 
 # Funcionalidades
 
-| Recurso | Descrição |
-|---|---|
-| Cadastro de clientes | Formulário com validação e hash de senha |
-| Login / Logout | Sessão via `sessionStorage` |
-| Esconder cadastro após login | Formulários somem; exibe painel do usuário |
-| Excluir própria conta | Botão no painel do usuário logado |
-| Delivery / Carrinho | Adiciona itens, calcula total, finaliza pedido |
-| Excluir pedidos | Botão por pedido na lista de pedidos |
-| Reservas de mesa | Formulário completo com lista |
-| Excluir reservas | Botão por reserva na lista |
+# Sistema de Clientes
 
-## Endpoints PHP
+* Cadastro de usuários
+* Login e logout
+* Persistência de sessão via `sessionStorage`
+* Exclusão da própria conta
 
-| Método | URL | Descrição |
-|---|---|---|
-| POST | `/backend/api/clientes.php` | Criar cliente |
-| GET  | `/backend/api/clientes.php` | Listar clientes |
+---
+
+# Delivery
+
+* Carrinho de compras
+* Adição de produtos
+* Cálculo automático de total
+* Finalização de pedidos
+* Exclusão de pedidos
+
+---
+
+# Reservas
+
+* Cadastro de reservas de mesa
+* Listagem de reservas
+* Exclusão de reservas
+
+---
+
+# Interface Reativa
+
+O projeto foi refatorado utilizando Alpine.js para controle de estados visuais:
+
+* Exibição dinâmica de formulários
+* Controle de login/logout
+* Mensagens de sucesso
+* Carrinho vazio/cheio
+* Alternância de telas sem manipulação manual excessiva de DOM
+
+---
+
+# Endpoints da API
+
+| Método | Endpoint                         | Descrição       |
+| ------ | -------------------------------- | --------------- |
+| POST   | `/backend/api/clientes.php`      | Criar cliente   |
+| GET    | `/backend/api/clientes.php`      | Listar clientes |
 | DELETE | `/backend/api/clientes.php?id=X` | Excluir cliente |
-| POST | `/backend/api/login.php` | Login |
-| POST | `/backend/api/reservas.php` | Criar reserva |
-| GET  | `/backend/api/reservas.php` | Listar reservas |
+| POST   | `/backend/api/login.php`         | Realizar login  |
+| POST   | `/backend/api/reservas.php`      | Criar reserva   |
+| GET    | `/backend/api/reservas.php`      | Listar reservas |
 | DELETE | `/backend/api/reservas.php?id=X` | Excluir reserva |
-| POST | `/backend/api/pedidos.php` | Criar pedido |
-| GET  | `/backend/api/pedidos.php` | Listar pedidos |
-| DELETE | `/backend/api/pedidos.php?id=X` | Excluir pedido |
+| POST   | `/backend/api/pedidos.php`       | Criar pedido    |
+| GET    | `/backend/api/pedidos.php`       | Listar pedidos  |
+| DELETE | `/backend/api/pedidos.php?id=X`  | Excluir pedido  |
+
+
+Projeto desenvolvido para fins acadêmicos e educacionais.
